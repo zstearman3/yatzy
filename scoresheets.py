@@ -26,3 +26,17 @@ class YatzyScoresheet:
 
     def score_one_pair(self, hand):
         return self._score_set(hand, 2)
+
+    def score_two_pairs(self, hand):
+        pass
+
+    def score_three_of_a_kind(self, hand):
+        return self._score_set(hand, 3)
+
+    def score_four_of_a_kind(self, hand):
+        return self._score_set(hand, 4)
+
+    def score_yatzy(self, hand):
+        if self._score_set(hand, 5):
+            return 50
+        return 0
