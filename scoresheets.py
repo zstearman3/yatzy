@@ -36,6 +36,15 @@ class YatzyScoresheet:
     def score_four_of_a_kind(self, hand):
         return self._score_set(hand, 4)
 
+    def score_chance(self, hand):
+        return sum(hand)
+
+    def score_large_straight(self, hand):
+        if all([hand._sets[2] == 1, hand._sets[3] == 1, hand._sets[4] == 1, hand._sets[5] == 1,
+                hand._sets[6] == 1]) or all([hand._sets[1] == 1, hand._sets[2] == 1,
+                hand._sets[3] == 1, hand._sets[4] == 1, hand._sets[5] == 1]):
+            return 20
+
     def score_yatzy(self, hand):
         if self._score_set(hand, 5):
             return 50
