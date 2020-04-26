@@ -9,6 +9,7 @@ class Die:
         if not isinstance(value, int):
             raise ValueError("Value must be a whole number")
         self.value = value or random.randint(1, sides)
+        self.sides = sides
 
     def __int__(self):
         return self.value
