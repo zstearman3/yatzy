@@ -81,7 +81,7 @@ class ScoresheetTests(DiceTests):
     def test_two_pairs_one_pair(self):
         hand = hands.YatzyHand()
         hand[:] = [self.dice[0], self.dice[0], self.dice[3]]
-        self.assertEqual(self.scoresheet.score_two_pairs(hand), 2)
+        self.assertEqual(self.scoresheet.score_two_pairs(hand), 0)
 
     def test_three_of_a_kind(self):
         hand = hands.YatzyHand()
@@ -117,4 +117,3 @@ class ScoresheetTests(DiceTests):
         hand = hands.YatzyHand()
         hand[:] = self._seed([4, 3, 3, 2, 1])
         self.assertEqual(self.scoresheet.score_chance(hand), 13)
-

@@ -28,14 +28,34 @@ class YatzyScoresheet:
         return self._score_set(hand, 2)
 
     def score_two_pairs(self, hand):
-        pass
+        scores = []
+        for worth, count in hand._sets.items():
+            if count == 2:
+                scores.append(worth*2)
+        if len(scores) == 2:
+            return sum(scores)
+        else:
+            return 0
 
     def score_three_of_a_kind(self, hand):
         return self._score_set(hand, 3)
 
     def score_full_house(self, hand):
-        pass
-        
+        scores = []
+        pair = False
+        three_of_a_kind = False
+        for worth, count in hand._sets.items():
+            if count == 2:
+                scores.append(worth*2)
+                pair = True
+            elif count == 3:
+                scores.append(worth*3)
+                three_of_a_kind = True
+        if pair and three_of_a_kind:
+            return sum(scores)
+        else:
+            return 0
+
     def score_four_of_a_kind(self, hand):
         return self._score_set(hand, 4)
 
