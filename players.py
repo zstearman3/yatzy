@@ -48,4 +48,60 @@ class BotPlayer(Player):
         return self.name
 
 class PlayerScoresheet():
-    pass
+    def __init__(self):
+        self.categories = (
+            Category('ones', 'Ones', '1'),
+            Category('twos', 'Twos', '2'),
+            Category('threes', 'Threes', '3'),
+            Category('fours', 'Fours', '4'),
+            Category('fives', 'Fives', '5'),
+            Category('sixes', 'Sixes', '6'),
+            Category('one_pair', 'One Pair', 'O'),
+            Category('two_pairs', 'Two Pairs', 'T'),
+            Category('three_of_a_kind', 'Three of a Kind', 'K'),
+            Category('four_of_a_kind', 'Four of a Kind', 'F'),
+            Category('small_straight', 'Small Straight', 'S'),
+            Category('large_straight', 'Large Straight', 'L'),
+            Category('full_house', 'Full House', 'H'),
+            Category('chance', 'Chance', 'C'),
+            Category('yatzy', 'Yatzy', 'Y')
+        )
+
+    def __getitem__(self, item):
+        try:
+            return [category for category in self.categories if category.name == item][0]
+        except IndexError:
+            raise KeyError
+
+    def get_by_key(self, key):
+        try:
+            return [category for category in self.categories if category.key == key][0]
+        except IndexError:
+            raise KeyError
+
+    @property
+    def score(self):
+        return sum([score for score in self.categories if score.score is not None])
+
+    @property
+    def open_categories(self):
+        categories = []
+        for category in self.categories:
+            if category.score is None:
+                categories.append(category)
+        return categories
+
+    @property
+    def open_keys(self):
+        keys = []
+        for category in self.categories:
+            if category.score is None:
+                keys.append(category.key)
+        return keys
+
+    def score_category(self, key, score):
+        try:
+            category = [category for category in self.categories if category.key == key][0]
+        except IndexError:
+            raise KeyError
+        category.score = score
