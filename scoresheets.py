@@ -79,3 +79,19 @@ class YatzyScoresheet:
         if self._score_set(hand, 5):
             return 50
         return 0
+
+class Category:
+    def __init__(self, name, display, key, score=None):
+        self.name = name
+        self.display = display
+        self.key = key
+        self.score = score
+
+    def __str__(self):
+        return self.display
+
+    def __add__(self, other):
+        return self.score + other
+
+    def __radd__(self, other):
+        return self.score + other
