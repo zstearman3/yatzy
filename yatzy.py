@@ -20,6 +20,18 @@ class Yatzy:
         if not humans and not bots:
             raise ValueError("Must provide either human or bot players")
 
+    def get_humans(self, num):
+        humans = []
+        for order in range (1, num+1):
+            name = input(f'Name for Player {order}: ')
+            humans.append(players.HumanPlayer(order, name))
+        return humans
+
+    def get_bots(self, num):
+        bots = set()
+        while len(bots) < num:
+            bots.add(players.BotPlayer(len(bots)+1))
+        return list(sorted(list(bots), key=lambda bot: bot.order))
 
 def start_game():
     print("How many are playing? (Press ENTER for 0)")
