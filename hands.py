@@ -165,12 +165,14 @@ class YatzyHand(Hand):
                 self._sets[4] >=1, self._sets[5] >=1]) or all([self._sets[3] >= 1,
                 self._sets[4] >= 1, self._sets[5] >=1, self._sets[6] >=1]):
             return 15
+        return 0
 
     def score_large_straight(self):
         if all([self._sets[2] == 1, self._sets[3] == 1, self._sets[4] == 1, self._sets[5] == 1,
                 self._sets[6] == 1]) or all([self._sets[1] == 1, self._sets[2] == 1,
                 self._sets[3] == 1, self._sets[4] == 1, self._sets[5] == 1]):
             return 20
+        return 0
 
     def score_yatzy(self):
         if self._score_set(5):
@@ -195,6 +197,23 @@ class YatzyHand(Hand):
             'C': self.score_chance(),
             'Y': self.score_yatzy()
         }
+        key_names = {
+            '1': 'ones',
+            '2': 'twos',
+            '3': 'threes',
+            '4': 'fours',
+            '5': 'fives',
+            '6': 'sixes',
+            'O': 'one_pair',
+            'T': 'two_pairs',
+            'K': 'three_of_a_kind',
+            'F': 'four_of_a_kind',
+            'H': 'full_house',
+            'S': 'small_straight',
+            'L': 'large_straight',
+            'C': 'chance',
+            'Y': 'yatzy'
+        }
         if limit:
             open_categories = []
             for category in limit:
@@ -202,4 +221,5 @@ class YatzyHand(Hand):
             for key in scores.copy():
                 if key not in open_categories:
                     del scores[key]
-        return max(scores, key=scores.get)
+        scored_key = max(scores, key=scores.get)
+        return scored_key, key_names[scored_key]

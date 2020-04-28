@@ -120,14 +120,14 @@ class Yatzy:
         else:
             all_players = list(
                 sorted(
-                    self.humans + self.get_bots,
+                    self.humans + self.bots,
                     key=attrgetter('score'),
                     reverse=True
                 )
             )
             print(f'{all_players[0].name} won with {all_players[0].score} points!')
             for player in all_players[1:]:
-                print(f'{player.name} finished with {player.points} points.')
+                print(f'{player.name} finished with {player.score} points.')
 
 def start_game():
     print("How many are playing? (Press ENTER for 0)")
