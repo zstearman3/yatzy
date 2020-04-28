@@ -121,7 +121,7 @@ class YatzyHand(Hand):
         return max(scores)
 
     def score_one_pair(self):
-        return self._score_set(self, 2)
+        return self._score_set(2)
 
     def score_two_pairs(self):
         scores = []
@@ -134,7 +134,7 @@ class YatzyHand(Hand):
             return 0
 
     def score_three_of_a_kind(self):
-        return self._score_set(self, 3)
+        return self._score_set(3)
 
     def score_full_house(self):
         scores = []
@@ -153,7 +153,7 @@ class YatzyHand(Hand):
             return 0
 
     def score_four_of_a_kind(self):
-        return self._score_set(self, 4)
+        return self._score_set(4)
 
     def score_chance(self):
         return sum(self)
@@ -172,7 +172,7 @@ class YatzyHand(Hand):
             return 20
 
     def score_yatzy(self):
-        if self._score_set(hand, 5):
+        if self._score_set(5):
             return 50
         return 0
 

@@ -78,7 +78,21 @@ class Yatzy:
         human.scoresheet.score_category(category_to_score, score)
 
     def get_human_reroll(self, human):
-        pass
+        clear()
+        self.human_precursor(human, dice_key=True)
+        which_die = input("Which die would you like to reroll? Press ENTER to cancel. ")
+        if which_die:
+            try:
+                which_die = int(which_die)
+                human.hand[which_die -1].reroll()
+            except ValueError:
+                return self.get_human_reroll(human)
+            except Exception:
+                return self.get_human_reroll(human)
+            else:
+                return self.human_round(human)
+        else:
+            return self.human_round(human)
 
     def human_round(self, human):
         self.human_precursor(human)

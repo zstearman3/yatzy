@@ -75,6 +75,12 @@ class D6(Die):
         super().__init__(sides=6, value=value)
         self.rolls = 1
 
+    def reroll(self):
+        if self.rolls == self.MAX_ROLLS:
+            raise Exception('Can only roll a die 3 times')
+        self.value = random.randint(1, 6)
+        self.rolls += 1
+
     @property
     def can_be_rerolled(self):
         return self.rolls < self.MAX_ROLLS
