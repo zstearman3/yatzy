@@ -49,6 +49,12 @@ class BotPlayer(Player):
     def __str__(self):
         return self.name
 
+    def play_round(self):
+        best_move = self.hand.score_max(self.scoresheet.open_categories)
+        score = self.hand.score(best_move)
+        self.scoresheet[best_move] = score
+        return
+
 class PlayerScoresheet():
     def __init__(self):
         self.categories = (

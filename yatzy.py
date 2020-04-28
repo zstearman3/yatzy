@@ -33,6 +33,38 @@ class Yatzy:
             bots.add(players.BotPlayer(len(bots)+1))
         return list(sorted(list(bots), key=lambda bot: bot.order))
 
+    def human_round(self, human):
+        self.human_precursor(human)
+        action = self.get_human_action(human)
+        if action == 's':
+            self.get_human_score(human)
+        else:
+            self.get_human_reroll(human)
+
+    def play_round(self):
+        for human in self.humans:
+            human.roll()
+            self.human_round(human)
+        for bot in self.bots:
+            bot.play_round()
+        self.current_round += 1
+        return
+
+    def play(self):
+        while self.current_round <= 15:
+            self.play_round()
+        else:
+            all_players = list(
+                sorted(
+                    self.humans + self.get_bots,
+                    key=attrgetter('score'),
+                    reverse=True
+                )
+            )
+            print(f'{all_players[0].name} won with {all_players[0].score} points!')
+            for player in all_players[1:]:
+                print(f'{player.name} finished with {player.points} points.')
+
 def start_game():
     print("How many are playing? (Press ENTER for 0)")
     human_count = int(input("Human players? ") or 0)
