@@ -87,6 +87,16 @@ class PlayerScoresheet():
         except IndexError:
             raise KeyError
 
+    def display(self, width):
+        for index, category in enumerate(self.open_categories, start=1):
+            print("{0:^{1}}".format(
+                '{} [{}]'.format(category.display, category.key),
+                width//3
+            ), end='\t')
+            if not index % 3:
+                print ('')
+        print('')
+
     @property
     def score(self):
         return sum([score for score in self.categories if score.score is not None])

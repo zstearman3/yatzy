@@ -44,6 +44,33 @@ class Die:
 class D6(Die):
     MAX_ROLLS = 3
 
+    template = """
+    | {} {} {} |
+    | {} {} {} |
+    | {} {} {} |
+    """
+
+    pips = {
+        1: [' ', ' ', ' ',
+            ' ', '*', ' ',
+            ' ', ' ', ' '],
+        2: ['*', ' ', ' ',
+            ' ', ' ', ' ',
+            ' ', ' ', '*'],
+        3: ['*', ' ', ' ',
+            ' ', '*', ' ',
+            ' ', ' ', '*'],
+        4: ['*', ' ', '*',
+            ' ', '', ' ',
+            '*', ' ', '*'],
+        5: ['*', ' ', '*',
+            ' ', '*', ' ',
+            '*', ' ', '*'],
+        6: ['*', ' ', '*',
+            '*', ' ', '*',
+            '*', ' ', '*'],
+    }
+
     def __init__(self, value=0):
         super().__init__(sides=6, value=value)
         self.rolls = 1
@@ -51,3 +78,7 @@ class D6(Die):
     @property
     def can_be_rerolled(self):
         return self.rolls < self.MAX_ROLLS
+
+    @property
+    def display(self):
+        return self.template.format(*self.pips[self.value])

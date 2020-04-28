@@ -55,3 +55,17 @@ class YatzyHand(Hand):
             5: len(self.fives),
             6: len(self.sixes)
         }
+
+    def display(self, width=0, show_key=False):
+        die_lines = []
+        for die in self:
+            die_lines.append(die.display.split('\n'))
+        for i in range(5):
+            for die in die_lines:
+                print('{0:^{1}}'.format(die[i], width//5), end='')
+            print('')
+            if show_key:
+                for num in range(1, 6):
+                    if self[num-1].can_be_rerolled:
+                        print('{0:^{1}}'.format('', width//5), end='')
+                print('')

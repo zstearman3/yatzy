@@ -1,4 +1,10 @@
+from operator import attrgetter
+import os
+import sys
 import players
+
+def clear():
+    os.system('cls' if os.name =='nt' else 'clear')
 
 class Yatzy:
     def __init__(self, humans=0, bots=0):
@@ -32,6 +38,18 @@ class Yatzy:
         while len(bots) < num:
             bots.add(players.BotPlayer(len(bots)+1))
         return list(sorted(list(bots), key=lambda bot: bot.order))
+
+    def show_player_info(self, player):
+        print('{0:^{1}}'.format(
+            '{} ({})'.format(player.name, player.score),
+            self.game_board_width
+        ))
+
+    def human_precursor(self, human, dice_key=False):
+        clear()
+        self.show_player_info(human)
+        human.hand.display(self.game_board_width, dice_key)
+        print('-'*self.game_board_width)
 
     def human_round(self, human):
         self.human_precursor(human)
