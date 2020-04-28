@@ -1,4 +1,5 @@
 from dice import D6
+import time
 
 class Hand(list):
     def __init__(self, size=0, die_class=D6):
@@ -178,24 +179,27 @@ class YatzyHand(Hand):
 
     def score_max(self, limit=None):
         scores = {
-            'ones': self.score_ones(),
-            'twos': self.score_twos(),
-            'threes':self.score_threes(),
-            'fours': self.score_fours(),
-            'fives': self.score_fives(),
-            'sixes': self.score_sixes(),
-            'one_pair': self.score_one_pair(),
-            'two_pairs': self.score_two_pairs(),
-            'three_of_a_kind': self.score_three_of_a_kind(),
-            'four_of_a_kind': self.score_four_of_a_kind(),
-            'full_house': self.score_full_house(),
-            'small_straight': self.score_small_straight(),
-            'large_straight': self.score_large_straight(),
-            'chance': self.score_chance(),
-            'yatzy': self.score_yatzy()
+            '1': self.score_ones(),
+            '2': self.score_twos(),
+            '3': self.score_threes(),
+            '4': self.score_fours(),
+            '5': self.score_fives(),
+            '6': self.score_sixes(),
+            'O': self.score_one_pair(),
+            'T': self.score_two_pairs(),
+            'K': self.score_three_of_a_kind(),
+            'F': self.score_four_of_a_kind(),
+            'H': self.score_full_house(),
+            'S': self.score_small_straight(),
+            'L': self.score_large_straight(),
+            'C': self.score_chance(),
+            'Y': self.score_yatzy()
         }
         if limit:
+            open_categories = []
+            for category in limit:
+                open_categories.append(category.key)
             for key in scores.copy():
-                if key not in limit:
+                if key not in open_categories:
                     del scores[key]
         return max(scores, key=scores.get)

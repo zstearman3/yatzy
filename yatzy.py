@@ -109,6 +109,7 @@ class Yatzy:
             human.roll()
             self.human_round(human)
         for bot in self.bots:
+            bot.roll()
             bot.play_round()
         self.current_round += 1
         return

@@ -2,6 +2,7 @@ import random
 from hands import YatzyHand
 from scoresheets import YatzyScoresheet
 from scoresheets import Category
+import time
 
 BOT_NAMES = [
     'Jon Snow',
@@ -53,7 +54,10 @@ class BotPlayer(Player):
     def play_round(self):
         best_move = self.hand.score_max(self.scoresheet.open_categories)
         score = self.hand.score(best_move)
-        self.scoresheet[best_move] = score
+        print(best_move)
+        print(score)
+        time.sleep(3)
+        self.scoresheet.score_category(best_move, score)
         return
 
 class PlayerScoresheet():
