@@ -30,8 +30,9 @@ class Player():
         self.hand = YatzyHand()
         return
 
+    @property
     def score(self):
-        return self.scoresheet
+        return self.scoresheet.score
 
 class HumanPlayer(Player):
     def __init__(self, order, name=None):

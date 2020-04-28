@@ -29,7 +29,7 @@ class YatzyHand(Hand):
             'fives': self.score_fives,
             'sixes': self.score_sixes,
             'one_pair': self.score_one_pair,
-            'two_pair': self.score_two_pairs,
+            'two_pairs': self.score_two_pairs,
             'three_of_a_kind': self.score_three_of_a_kind,
             'four_of_a_kind': self.score_four_of_a_kind,
             'full_house': self.score_full_house,
