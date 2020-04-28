@@ -51,6 +51,35 @@ class Yatzy:
         human.hand.display(self.game_board_width, dice_key)
         print('-'*self.game_board_width)
 
+    def get_human_action(self, human, dice_key=False):
+        prompt = "[S]core"
+        if human.hand.left_to_reroll:
+            prompt += ", [R]eroll,"
+        action = input('{} or [Q]uit: '.format(prompt)).lower()
+        if action not in 'srq':
+            return self.get_human_action(human)
+        if action == 'q':
+            sys.exit(0)
+        return action
+
+    def get_human_score(self, human):
+        clear()
+        self.human_precursor(human)
+        human.scoresheet.display(self.game_board_width)
+        print('-'*self.game_board_width)
+        category_to_score = input("What do you want to score? Press Enter to cancel. ").upper()
+        if not category_to_score:
+            return self.human_round(human)
+        if category_to_score not in human.scoresheet.open_keys:
+            return self.get_human_score(human)
+        else:
+            category = human.scoresheet.get_by_key(category_to_score)
+        score = human.hand.score(category.name)
+        human.scoresheet.score_category(category_to_score, score)
+
+    def get_human_reroll(self, human):
+        pass
+
     def human_round(self, human):
         self.human_precursor(human)
         action = self.get_human_action(human)

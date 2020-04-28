@@ -1,4 +1,5 @@
 class YatzyScoresheet:
+
     def score_ones(self, hand):
         return sum(hand.ones)
 
