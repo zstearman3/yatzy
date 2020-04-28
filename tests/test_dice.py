@@ -5,7 +5,7 @@ import dice
 class DiceTests(unittest.TestCase):
     def test_die(self):
         die = dice.Die()
-        self.assertIn(int(die), range(1, 6))
+        self.assertIn(int(die), range(1, 7))
 
     def test_die_value(self):
         die = dice.Die(value=8)

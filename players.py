@@ -1,5 +1,7 @@
 import random
+from hands import YatzyHand
 from scoresheets import YatzyScoresheet
+from scoresheets import Category
 
 BOT_NAMES = [
     'Jon Snow',
@@ -25,7 +27,7 @@ class Player():
         return '<{}: {}>'.format(self.__class__.__name__, str(self))
 
     def roll(self):
-        self.hand = dice.Hand()
+        self.hand = YatzyHand()
         return
 
     def score(self):
