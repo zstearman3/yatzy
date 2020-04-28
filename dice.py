@@ -42,5 +42,12 @@ class Die:
         return str(self.value)
 
 class D6(Die):
+    MAX_ROLLS = 3
+
     def __init__(self, value=0):
         super().__init__(sides=6, value=value)
+        self.rolls = 1
+
+    @property
+    def can_be_rerolled(self):
+        return self.rolls < self.MAX_ROLLS

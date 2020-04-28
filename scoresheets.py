@@ -80,6 +80,34 @@ class YatzyScoresheet:
             return 50
         return 0
 
+    def score_max(self, limit=None):
+        scores = {
+            'ones': self.score_ones(),
+            'twos': self.score_twos(),
+            'threes':self.score_threes(),
+            'fours': self.score_fours(),
+            'fives': self.score_fives(),
+            'sixes': self.score_sixes(),
+            'one_pair': self.score_one_pair(),
+            'two_pairs': self.score_two_pairs(),
+            'three_of_a_kind': self.score_three_of_a_kind(),
+            'four_of_a_kind': self.score_four_of_a_kind(),
+            'full_house': self.score_full_house(),
+            'small_straight': self.score_small_straight(),
+            'large_straight': self.score_large_straight(),
+            'chance': self.score_chance(),
+            'yatzy': self.score_yatzy()
+        }
+        if limit:
+            for key in scores.copy():
+                if key not in limit:
+                    del scores[key]
+        return max(scores, key=scores.get)
+
+        @property
+        def left_to_reroll(self, hand):
+            return any([die.can_be_rerolled for die in hand])
+
 class Category:
     def __init__(self, name, display, key, score=None):
         self.name = name
