@@ -2,6 +2,7 @@ from operator import attrgetter
 import os
 import sys
 import players
+import time
 
 def clear():
     os.system('cls' if os.name =='nt' else 'clear')
@@ -80,17 +81,18 @@ class Yatzy:
     def get_human_reroll(self, human):
         clear()
         self.human_precursor(human, dice_key=True)
-        which_die = input("Which die would you like to reroll? Press ENTER to cancel. ")
-        if which_die:
-            try:
-                which_die = int(which_die)
-                human.hand[which_die -1].reroll()
-            except ValueError:
-                return self.get_human_reroll(human)
-            except Exception:
-                return self.get_human_reroll(human)
-            else:
-                return self.human_round(human)
+        which_dice = input("Which dice would you like to reroll? Separate dice with a comma. Press ENTER to cancel. ")
+        if which_dice:
+            dice = tuple(map(int, which_dice.split(',')))
+            for die in dice:
+                try:
+                    which_die = int(die)
+                    human.hand[which_die -1].reroll()
+                except ValueError:
+                    return self.get_human_reroll(human)
+                except Exception:
+                    return self.get_human_reroll(human)
+            return self.human_round(human)
         else:
             return self.human_round(human)
 
