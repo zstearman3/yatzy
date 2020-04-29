@@ -54,9 +54,10 @@ class BotPlayer(Player):
     def play_round(self):
         best_move = self.hand.score_max(self.scoresheet.open_categories)
         score = self.hand.score(best_move[1])
+        print('-' * 10)
         print(f'{self.name} plays {best_move[1]} for {score} points.')
-        print('')
-        time.sleep(0.1)
+        print('-' * 10)
+        time.sleep(2.5)
         self.scoresheet.score_category(best_move[0], score)
         return
 
